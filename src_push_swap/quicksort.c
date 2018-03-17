@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   quicksort.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/06 10:41:32 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/12 15:58:32 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:21:12 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:21:12 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 void		quicksort(t_list **a, t_list **b)
 {
-	int		step[100];
+	int		step[1000];
 
 	step[0] = ft_lstlen(*a);
 	step[1] = 0;

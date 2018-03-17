@@ -3,36 +3,35 @@
 /*                                                              /             */
 /*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:01 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 09:30:51 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:49:06 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:49:11 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
-
 int		ft_atoi(const char *str)
 {
-	long	result;
-	long	neg;
+	char *cursor;
+	long neg;
+	long nb;
 
-	result = 0;
 	neg = 1;
-	str = (char *)str;
-	while (((*str >= 9) && (*str <= 13)) || (*str == ' '))
-		str++;
-	if (*str == '-' || *str == '+')
+	nb = 0;
+	cursor = (char *)str;
+	while ((*cursor <= 13 && *cursor >= 9) || *cursor == ' ')
+		cursor++;
+	if (*cursor == '-' || *cursor == '+')
 	{
-		if (*str == '-')
+		if (*cursor == '-')
 			neg = -1;
-		str++;
+		cursor++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (*cursor <= '9' && *cursor >= '0')
 	{
-		result = 10 * result + (*str - '0');
-		str++;
+		nb = 10 * nb + *cursor - '0';
+		cursor++;
 	}
-	return ((int)(result * neg));
+	return ((int)(nb * neg));
 }

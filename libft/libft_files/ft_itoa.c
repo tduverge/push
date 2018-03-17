@@ -3,54 +3,52 @@
 /*                                                              /             */
 /*   ft_itoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:03 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 10:07:21 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:50:27 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:50:27 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../header/libft.h"
 
-static int		ft_nbdigits(int nb)
+static void	ft_len_n(long n, int *i)
 {
-	int		nb_digits;
-	long	n;
-
-	n = (long)nb;
 	if (n < 0)
-		n *= -1;
-	nb_digits = 0;
-	while (n /= 10)
-		nb_digits++;
-	return (nb_digits);
+	{
+		n = -n;
+		(*i)++;
+	}
+	if (n >= 10)
+		ft_len_n(n / 10, i);
+	*i = *i + 1;
 }
 
-char			*ft_itoa(int n)
+static void	ft_itoa_rec(long n, int i, char *res, int len_n)
 {
-	char	*a_nb;
-	int		neg;
-	int		i;
-	long	nb;
-
-	nb = (long)n;
-	neg = 0;
-	if (nb == 0)
-		return (ft_strdup("0"));
-	if (nb < 0)
-		nb *= (neg = -1);
-	if (!(a_nb = malloc((ft_nbdigits(nb) + 1 + (neg * -1)) * sizeof(char))))
-		return (NULL);
-	i = 0;
-	while (nb)
+	if (n < 0)
 	{
-		a_nb[i++] = '0' + (nb % 10);
-		nb /= 10;
+		res[0] = '-';
+		n = -n;
 	}
-	if (neg == -1)
-		a_nb[i++] = '-';
-	a_nb[i] = '\0';
-	return (ft_strrev(a_nb));
+	if (n >= 10)
+		ft_itoa_rec(n / 10, i + 1, res, len_n);
+	res[len_n - i] = n % 10 + '0';
+}
+
+char		*ft_itoa(int n)
+{
+	int		len_n;
+	char	*res;
+	long	n_long;
+
+	n_long = n;
+	len_n = 0;
+	ft_len_n(n_long, &len_n);
+	if (!(res = (char*)malloc(sizeof(char) * (len_n + 1))))
+		return (NULL);
+	ft_itoa_rec(n_long, 1, res, len_n);
+	res[len_n] = '\0';
+	return (res);
 }

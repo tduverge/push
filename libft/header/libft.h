@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   libft.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/02/28 09:38:27 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/03 15:52:59 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 19:25:59 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 19:26:04 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,6 +116,7 @@ int						ft_islower(char c);
 int						ft_pow(int n, int pow);
 int						*ft_bubble_sort(int *tab, int length);
 int						*ft_merge_sort(int *tab, int length);
+size_t					ft_count_words(char const *s, char c);
 
 typedef enum			e_modif
 {

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strtrim.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:13 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 09:29:26 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:51:51 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:51:51 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,27 +15,27 @@
 
 char	*ft_strtrim(char const *s)
 {
-	size_t	i;
-	size_t	j;
-	char	*s_n;
-	char	*blank;
+	size_t	start;
+	size_t	len_s;
+	size_t	end;
+	char	*res;
 
-	if (s)
+	if (!(s))
+		return (NULL);
+	len_s = ft_strlen(s);
+	start = 0;
+	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+		start++;
+	end = len_s - 1;
+	while ((s[end] == ' ' || s[end] == '\n' || s[end] == '\t') && end != 0 &&
+			len_s != 0)
+		end--;
+	if (end == 0 || len_s == 0)
 	{
-		s_n = (char *)s;
-		i = 0;
-		j = ft_strlen(s) - 1;
-		while (s_n[i] && (s_n[i] == ' ' || s_n[i] == '\t' || s_n[i] == '\n'))
-			i++;
-		while (s_n[j] && (s_n[j] == ' ' || s_n[j] == '\t' || s_n[j] == '\n'))
-			j--;
-		if (s_n[i] == '\0')
-		{
-			blank = ft_strnew(1);
-			*blank = '\0';
-			return (blank);
-		}
-		return (ft_strsub(s, i, j - i + 1));
+		res = (char *)malloc(sizeof(char) * 1);
+		*res = '\0';
+		return (res);
 	}
-	return (NULL);
+	res = ft_strsub(s, start, end - start + 1);
+	return (res);
 }

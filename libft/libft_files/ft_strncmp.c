@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strncmp.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:11 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 11:44:05 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:51:10 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:51:10 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,13 +16,17 @@
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
+	unsigned char	*s11;
+	unsigned char	*s22;
 
+	s11 = (unsigned char *)s1;
+	s22 = (unsigned char *)s2;
 	i = 0;
+	while (s11[i] == s22[i] && s11[i] != '\0' && i < n)
+		i++;
 	if (n == 0)
 		return (0);
-	while ((s1[i] == s2[i]) && s1[i] && (i < n))
-		i++;
-	if (i == n)
-		return ((int)((unsigned char)s1[i - 1] - (unsigned char)s2[i - 1]));
-	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
+	else if (i != n)
+		return ((int)s11[i] - (int)s22[i]);
+	return ((int)s11[i - 1] - (int)s22[i - 1]);
 }

@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_pow.c                                         .::    .:/ .      .::   */
+/*   ft_power.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:06 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 09:29:16 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:50:45 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:50:45 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 
-int		ft_pow(int n, int pow)
+int		ft_power(int nb, int power)
 {
-	long	result;
-	size_t	i;
-
-	i = 0;
-	if (pow == 0)
+	if (power < 0)
+		return (0);
+	if (power == 0)
 		return (1);
-	result = n;
-	while (i < pow - 1)
-	{
-		result *= n;
-		i++;
-	}
-	return ((int)result);
+	return (nb * ft_power(nb, power - 1));
 }

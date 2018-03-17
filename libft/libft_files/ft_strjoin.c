@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strjoin.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:09 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 11:38:08 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:51:04 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:51:04 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,17 +15,28 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len;
-	char	*new;
+	size_t	len_s1;
+	size_t	len_s2;
+	size_t	i;
+	char	*res;
 
-	if (s1 && s2)
+	if (!(s1 && s2))
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	if (!(res = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1))))
+		return (NULL);
+	i = 0;
+	while (i < len_s1)
 	{
-		len = (ft_strlen(s1) + ft_strlen(s2));
-		if (!(new = ft_memalloc(len + 1)))
-			return (NULL);
-		ft_strcat(new, s1);
-		ft_strcat(new, s2);
-		return (new);
+		res[i] = s1[i];
+		i++;
 	}
-	return (NULL);
+	while (i < len_s1 + len_s2)
+	{
+		res[i] = s2[i - len_s1];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }

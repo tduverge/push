@@ -6,7 +6,7 @@
 #    By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/27 09:15:15 by kbedene      #+#   ##    ##    #+#        #
-#    Updated: 2018/03/14 16:57:22 by kbedene     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/03/17 17:33:22 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -37,7 +37,9 @@ PSHSWP_SRC_FILES = \
 				quicksort.c\
 				quick_a.c\
 				quick_b.c\
-				sort_3.c\
+				change_step_2.c\
+				change_step_3.c\
+				change_step_4.c\
 				change_to_index.c\
 				get_elem_at_index.c\
 				ft_lstis_sorted.c\

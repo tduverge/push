@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strmapi.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:10 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 09:29:17 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:51:08 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:51:08 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,21 +15,21 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
-	char			*new;
+	size_t	len;
+	size_t	i;
+	char	*res;
 
-	if (s)
+	if (!(s && f))
+		return (NULL);
+	len = ft_strlen(s);
+	if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		if (!(new = (char *)malloc((ft_strlen(s) + 1) * sizeof(char))))
-			return (NULL);
-		i = 0;
-		while (s[i])
-		{
-			new[i] = f(i, (char)(s[i]));
-			i++;
-		}
-		new[i] = '\0';
-		return (new);
+		res[i] = f(i, s[i]);
+		i++;
 	}
-	return (NULL);
+	res[len] = '\0';
+	return (res);
 }

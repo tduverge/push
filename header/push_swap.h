@@ -6,7 +6,7 @@
 /*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/27 19:19:28 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/14 16:56:36 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/17 17:31:59 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,8 +58,9 @@ void	only_need_rotate(t_list **a, t_list **b, int len);
 void	quicksort(t_list **a, t_list **b);
 void	quick_a(t_list **a, t_list **b, int *step, int test);
 void	quick_b(t_list **a, t_list **b, int *step);
-void	sort_3(t_list **a, t_list **b, int *step);
-void	change_step_2(t_list **a, t_list **b, int *step, int treat);
+void	change_step_2(t_list **a, t_list **b);
+void	change_step_3(t_list **a, t_list **b);
+void	change_step_4(t_list **a, t_list **b, int treat);
 
 /*
  ** Getters

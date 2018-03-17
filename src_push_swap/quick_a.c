@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   quick_a.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/12 15:12:52 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/14 22:36:58 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:21:05 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:21:05 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,99 +28,7 @@ static float	calc_median_a(t_list *lst, int treat)
 			max = content(lst);
 		lst = lst->next;
 	}
-	return ((float)(min + max) / 2);
-}
-
-void			change_step_2(t_list **a, t_list **b, int *step, int treat)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 2;
-	while (step[i + 1])
-		i++;
-	if (!ft_stepis_sorted(*a, 2))
-		apply_actions_pshswp(a, b, SA, "sa\n");
-	while (j--)
-		apply_actions_pshswp(a, b, RA, "ra\n");
-	step[i] = 0;
-	treat == 2 ? quick_a(a, b, step, 1) : 0;
-	return ;
-}
-
-static void		change_step_3(t_list **a, t_list **b, int *step, int treat)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 3;
-	while (step[i + 1])
-		i++;
-	if (ft_stepis_sorted(*a, 3))
-		while (j--)
-			apply_actions_pshswp(a, b, RA, "ra\n");
-	else
-		sort_3(a, b, step);
-	step[i] = 0;
-	treat == 3 ? quick_a(a, b, step, 1) : 0;
-	return ;
-}
-
-static void		change_step_4(t_list **a, t_list **b, int *step, int treat)
-{
-	int		max;
-	int		min;
-	t_list	*tmp;
-
-	tmp = *a;
-	max = content(tmp);
-	min = content(tmp);
-	while (treat--)
-	{
-		if (content(tmp) > max)
-			max = content(tmp);
-		if (content(tmp) < min)
-			min = content(tmp);
-		tmp = tmp->next;
-	}
-	if (content(*a) == min || content((*a)->next) == min)
-	{
-		if (content((*a)->next) == min)
-			apply_actions_pshswp(a, b, SA, "sa\n");
-		apply_actions_pshswp(a, b, RA, "ra\n");
-		change_step_3(a, b, step, 4);
-	}
-	else if (content(*a) == max || content((*a)->next) == max)
-	{
-		if (content((*a)->next) == max)
-			apply_actions_pshswp(a, b, SA, "sa\n");
-		apply_actions_pshswp(a, b, PB, "pb\n");
-		change_step_3(a, b, step, 4);
-		apply_actions_pshswp(a, b, PA, "pa\n");
-		apply_actions_pshswp(a, b, RA, "ra\n");
-	}
-	else
-	{
-		apply_actions_pshswp(a, b, PB, "pb\n");
-		apply_actions_pshswp(a, b, PB, "pb\n");
-		if (content(*b) < content((*b)->next))
-		{
-			if (content(*a) == max)
-				apply_actions_pshswp(a, b, SS, "ss\n");
-			else
-				apply_actions_pshswp(a, b, SB, "sb\n");
-		}
-		if (content(*a) == max)
-			apply_actions_pshswp(a, b, SA, "sa\n");
-		apply_actions_pshswp(a, b, RA, "ra\n");
-		apply_actions_pshswp(a, b, PA, "pa\n");
-		apply_actions_pshswp(a, b, PA, "pa\n");
-		change_step_3(a, b, step, 4);
-	}
-	quick_a(a, b, step, 1);
-	return ;
+	return ((float)2 / 3 * (max - min) + min);
 }
 
 static void		rotate_or_push_a(t_list **a, t_list **b, int c, int *i)
@@ -130,6 +38,43 @@ static void		rotate_or_push_a(t_list **a, t_list **b, int c, int *i)
 	else
 		apply_actions_pshswp(a, b, PB, "pb\n");
 	(*i)++;
+}
+
+static int		start_move(t_list **a, t_list **b, int *step, int i)
+{
+	if ((content(*a) == get_elem_last(*a) + 1) || step[i] == 1)
+	{
+		apply_actions_pshswp(a, b, RA, "ra\n");
+		(step[i])--;
+		quick_a(a, b, step, 1);
+		return (1);
+	}
+	if (content((*a)->next) == get_elem_last(*a) + 1)
+	{
+		apply_actions_pshswp(a, b, SA, "sa\n");
+		apply_actions_pshswp(a, b, RA, "ra\n");
+		(step[i])--;
+		quick_a(a, b, step, 1);
+		return (1);
+	}
+	return (0);
+}
+
+static void		change_step(t_list **a, t_list **b, int *step, int treat)
+{
+	int		i;
+
+	i = 0;
+	while (step[i + 1])
+		i++;
+	if (treat == 4)
+		change_step_4(a, b, treat);
+	else if (treat == 3)
+		change_step_3(a, b);
+	else if (treat == 2)
+		change_step_2(a, b);
+	step[i] = 0;
+	quick_a(a, b, step, 1);
 }
 
 void			quick_a(t_list **a, t_list **b, int *step, int test)
@@ -143,29 +88,18 @@ void			quick_a(t_list **a, t_list **b, int *step, int test)
 	i = 0;
 	while (step[i + 1])
 		i++;
+	if (test && start_move(a, b, step, i))
+		return ;
 	treat = step[i];
 	median = calc_median_a(*a, treat);
-	if (treat == 4)
-	{
-		change_step_4(a, b, step, treat);
-		return ;
-	}
-	else if (treat == 3)
-	{
-		change_step_3(a, b, step, treat);
-		return ;
-	}
-	else if (treat == 2)
-	{
-		change_step_2(a, b, step, treat);
-		return ;
-	}
+	if (0 < treat && treat <= 4)
+		return (change_step(a, b, step, treat));
 	j = 0;
 	k = 0;
-	while (treat-- && k < (step[i] + 1) / 2)
+	while (treat-- && k <= 2 * step[i] / 3)
 		((float)content(*a)) > median ? rotate_or_push_a(a, b, 0, &j) :
 			rotate_or_push_a(a, b, 1, &k);
-	step[i] = step[i] / 2;
+	step[i] -= k;
 	while (j-- && test)
 		apply_actions_pshswp(a, b, RRA, "rra\n");
 	step[0] ? quick_b(a, b, step) : 0;

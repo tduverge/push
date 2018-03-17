@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_lstis_sorted.c                                .::    .:/ .      .::   */
+/*   ft_lstis_sorted_b.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/02/26 18:31:12 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/14 13:33:47 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:21:05 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:21:05 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,27 +54,3 @@ int		ft_lstis_sorted_b(t_list *pile)
 		return (1);
 	return (0);
 }
-
-/*
-int		ft_stepis_sorted(t_list *pile, int n)
-{
-	t_list		*cur;
-	t_list		*ahead;
-
-	cur = pile;
-	if (!cur)
-		return (0);
-	if (!(cur->next))
-		return (1);
-	ahead = cur->next;
-	n--;
-	while (ahead && content(cur) < content(ahead) && n--)
-	{
-		cur = ahead;
-		ahead = ahead->next;
-	}
-	if (!n)
-		return (1);
-	return (0);
-}
-*/

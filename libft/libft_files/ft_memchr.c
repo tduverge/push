@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_memchr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/27 18:37:04 by kbedene      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 10:18:10 by kbedene     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/17 18:50:39 by tduverge     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/17 18:50:39 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,15 +16,17 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t			i;
-	unsigned char	value;
+	unsigned char	*s1;
+	unsigned char	needle;
 
+	needle = (unsigned char)c;
+	s1 = (unsigned char *)s;
 	i = 0;
-	value = (unsigned char)c;
 	while (i < n)
 	{
-		if (*(unsigned char *)s == value)
-			return ((void *)s);
-		s++;
+		if (*s1 == needle)
+			return ((void *)s1);
+		s1++;
 		i++;
 	}
 	return (NULL);
