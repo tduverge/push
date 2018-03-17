@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/17 18:21:06 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/17 18:21:06 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/17 21:17:58 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static float	calc_median_b(t_list *lst)
 			max = content(lst);
 		lst = lst->next;
 	}
-	return ((float)(min + max) / 2);
+	return ((float)(max + min) / 2);
 }
 
 static void		empty_b(t_list **a, t_list **b, int *step, int j)
@@ -112,7 +112,7 @@ void			quick_b(t_list **a, t_list **b, int *step)
 		j++;
 	if (len <= 3)
 		return (empty_b(a, b, step, j));
-	else if (len <= 25)
+	else if (len <= 23)
 		return (select_sort(a, b, step, j));
 	i = 0;
 	while (i < len / 2)

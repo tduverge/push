@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/17 18:21:05 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/17 18:21:05 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/17 21:18:28 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static float	calc_median_a(t_list *lst, int treat)
 			max = content(lst);
 		lst = lst->next;
 	}
-	return ((float)2 / 3 * (max - min) + min);
+	return ((float)2 * (max - min) / 3 + min);
 }
 
 static void		rotate_or_push_a(t_list **a, t_list **b, int c, int *i)
