@@ -52,6 +52,7 @@ void			option_g(t_list **a, t_list **b, t_param *p)
 	p->win = mlx_new_window(p->mlx, 1000, 800, "Pushswap");
 	p->max = *(int*)((*a)->content);
 	tmp = *a;
+	p->elem = 0;
 	while (tmp)
 	{
 		if ((*(int*)(tmp->content)) > 0 && (*(int*)(tmp->content)) > p->max)
@@ -59,6 +60,7 @@ void			option_g(t_list **a, t_list **b, t_param *p)
 		if ((*(int*)(tmp->content)) < 0 && -(*(int*)(tmp->content)) > p->max)
 			p->max = -(*(int*)(tmp->content));
 		tmp = tmp->next;
+		(p->elem)++;
 	}
 	p->max = p->max == 0 ? 1 : p->max;
 	p->a = a;

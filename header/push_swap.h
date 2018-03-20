@@ -35,6 +35,7 @@ typedef struct			s_param
 		void			*win;
 		void			*img;
 		int				max;
+		int				elem;
 		int				nb;
 		char			v;
 		char			g;

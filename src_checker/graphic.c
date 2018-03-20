@@ -25,7 +25,7 @@ void	make_img(t_list *a, t_param *p, char **img)
 	{
 		x_len = *(int*)(a->content) * 400 / p->max;
 		x_len = x_len > 0 ? x_len : -x_len;
-		y_size = (float)700 / p->max;
+		y_size = (float)700 / p->elem;
 		while (y_size)
 		{
 			x = 0;
