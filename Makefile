@@ -23,7 +23,10 @@ CHECKR_SRC_FILES = \
 				actions.c\
 				apply_actions.c\
 				display.c\
-				check_io.c
+				check_io.c\
+				graphic.c\
+				option_g.c\
+				not_option_g.c
 
 PSHSWP_SRC_FILES = \
 				main.c\
@@ -59,6 +62,10 @@ CC = gcc
 
 FLAGS = -Wall -Werror -Wextra -ggdb
 
+MINILIBX= minilibx_macos/libmlx.a
+
+MLX_FLAGS = -framework OpenGL -framework AppKit
+
 .PHONY: all clean fclean re $(LIB)
 
 all: $(LIB) $(CHECKR) $(PSHSWP)
@@ -67,7 +74,7 @@ $(LIB):
 	@make -C libft/
 
 $(CHECKR): $(CHECKR_OBJ) $(PSHSWP_OBJ)
-	@$(CC) $(FLAGS) $(CHECKR_OBJ) $(LIBFT) -o $(CHECKR)
+	@$(CC) $(FLAGS) $(CHECKR_OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(CHECKR)
 	@$(CC) $(FLAGS) $(PSHSWP_OBJ) $(LIBFT) -o $(PSHSWP)
 	@echo "\033[32mchecker and push_swap created.\033[0m"
 
@@ -81,7 +88,6 @@ clean:
 	@/bin/rm -f $(CHECKR_OBJ) $(PSHSWP_OBJ)
 	@make clean -C ./libft
 	@echo "\033[31mObjects deleted.\033[0m"
-
 fclean: clean
 	@/bin/rm -f $(CHECKR) $(PSHSWP)
 	@/bin/rm -f $(LIBFT)

@@ -45,25 +45,23 @@ static void		ps_revrots(int apply, t_list **a, t_list **b)
 		revrot_pile(b);
 }
 
-void			apply_actions(t_list **a, t_list **b, t_list *cmds, char v)
+void			apply_actions(t_list **a, t_list **b, t_param *p)
 {
 	int		cmd;
 
-	if (!cmds)
-		return ;
-	while (cmds)
-	{
-		cmd = *(int *)(cmds->content);
-		if (cmd / 10 == 0)
-			ps_swaps(cmd % 10, a, b);
-		else if (cmd / 10 == 1)
-			ps_pushes(cmd % 10, a, b);
-		else if (cmd / 10 == 2)
-			ps_rotates(cmd % 10, a, b);
-		else if (cmd / 10 == 3)
-			ps_revrots(cmd % 10, a, b);
-		cmds = cmds->next;
-		if (v)
-			print_lsts(cmd, *a, *b);
-	}
+	(p->nb)++;
+	cmd = *(int *)((p->commands)->content);
+	if (cmd / 10 == 0)
+		ps_swaps(cmd % 10, a, b);
+	else if (cmd / 10 == 1)
+		ps_pushes(cmd % 10, a, b);
+	else if (cmd / 10 == 2)
+		ps_rotates(cmd % 10, a, b);
+	else if (cmd / 10 == 3)
+		ps_revrots(cmd % 10, a, b);
+	p->commands = p->commands->next;
+	if (p->v)
+		print_lsts(cmd, *a, *b);
+	if (p->g)
+		graphic(*a, *b, p);
 }

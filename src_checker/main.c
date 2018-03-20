@@ -60,30 +60,57 @@ static int		ex_prg(int err, t_list **a, t_list **b, t_list **cmds)
 	return (-1);
 }
 
+int		detect_option(char **av, t_param *p)
+{
+	int		i;
+	int		j;
+
+	i = 1;
+	while (av[i][0] == '-' && !ft_isdigit(av[i][1]))
+	{
+		j = 1;
+		while (av[i][j])
+		{
+			if (av[i][j] == 'v')
+				p->v = 1;
+			else if (av[i][j] == 'g')
+				p->g = 1;
+			else
+			{
+				ft_putstr("Invalid Option. Only v or g are support.\n");
+				exit(2);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (i);
+}
+
 int				main(int ac, char **av)
 {
 	int		i;
 	t_list	*a;
 	t_list	*b;
 	t_list	*commands;
-	char	v;
+	t_param	p;
 
-	v = 0;
+	p.v = 0;
+	p.g = 0;
+	p.stop = 1;
 	a = NULL;
 	b = NULL;
 	commands = NULL;
 	if (ac < 2)
 		return (0);
-	if (!strcmp(av[1], "-v"))
-		v = 1;
 	i = ac - 1;
-	while (i >= 1 + v)
+	while (i >= detect_option(av, &p))
 		if (not_format(&a, av[i--]))
 			return (ex_prg(1, &a, &b, &commands));
 	commands = command_list();
-	if (v)
+	p.commands = commands;
+	if (p.v)
 		print_lsts(200, a, b);
-	apply_actions(&a, &b, commands, v);
-	(ft_is_sorted(a) && !b) ? printf("OK\n") : printf("KO\n");
+	p.g ? option_g(&a, &b, &p) : not_option_g(&a, &b, &p);
 	return (ex_prg(0, &a, &b, &commands));
 }

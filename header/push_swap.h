@@ -15,7 +15,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/header/libft.h"
-# include <stdio.h>
+# include "../minilibx_macos/mlx.h"
 
 # define SA 0
 # define SB 1
@@ -29,6 +29,21 @@
 # define RRB 31
 # define RRR 32
 
+typedef struct			s_param
+{
+		void			*mlx;
+		void			*win;
+		void			*img;
+		int				max;
+		int				nb;
+		char			v;
+		char			g;
+		char			stop;
+		char			end;
+		t_list			**a;
+		t_list			**b;
+		t_list			*commands;
+}						t_param;
 /*
  ** Parse functions
 */
@@ -42,7 +57,7 @@ void	swap_pile(t_list **p);
 void	push_pile(t_list **dst, t_list **src);
 void	rotate_pile(t_list **p);
 void	revrot_pile(t_list **p);
-void	apply_actions(t_list **a, t_list **b, t_list *cmds, char v);
+void	apply_actions(t_list **a, t_list **b, t_param *p);
 void	apply_actions_pshswp(t_list **a, t_list **b, int cmd, char *v);
 void	change_to_index(t_list *a);
 int		premade_ss(t_list **a, t_list **b);
@@ -83,5 +98,11 @@ int		ft_lstis_sorted_b(t_list *pile);
 int		ft_lstis_inorder_b(t_list *pile);
 int		is_valid_input(char *cmd);
 void	print_lsts(int cmd, t_list *a, t_list *b);
+int		graphic(t_list *a, t_list *b, t_param *p);
+int		loop_funct(void *param);
+int		key_funct(int keycode, void *param);
+int		one_step(void *param);
+void	option_g(t_list **a, t_list **b, t_param *p);
+void	not_option_g(t_list **a, t_list **b, t_param *p);
 
 #endif
