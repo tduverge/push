@@ -82,6 +82,8 @@ int		detect_option(char **av, t_param *p)
 			}
 			j++;
 		}
+		j == 1 ? ft_putstr("Invalid Option. Only v or g are support.\n") : 0;
+		j == 1 ? exit(2) : 0;
 		i++;
 	}
 	return (i);

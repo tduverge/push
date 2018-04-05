@@ -26,16 +26,16 @@ void	make_img(t_list *a, t_param *p, char **img)
 		x_len = *(int*)(a->content) * 400 / p->max;
 		x_len = x_len > 0 ? x_len : -x_len;
 		y_size = (float)700 / p->elem;
-		while (y_size)
+		while (y_size--)
 		{
 			x = 0;
 			while (x <= x_len)
 			{
-				fill_pixel(*img, x, y,
-				*(int*)(a->content) >= 0 ? 0xFF0000 : 0xFF);
+				fill_pixel(*img, x, y, *(int*)(a->content) >= 0 ?
+				(55 + x_len / 2) * 65536 + (int)(255 - x_len / 1.6) * 256 + 10 :
+				10 * 65536 + (int)(255 - x_len / 1.6) * 256 +  55 + x_len / 2);
 				x++;
 			}
-			y_size--;
 			y--;
 		}
 		a = a->next;
@@ -54,6 +54,7 @@ int		drawer(t_list *a, t_list *b, t_param *p)
 	mlx_put_image_to_window(p->mlx, p->win, img, 0, 0);
 	mlx_destroy_image(p->mlx, img);
 	img = mlx_new_image(p->mlx, 500, 800);
+	img_add = mlx_get_data_addr(img, i, i + 1, i + 2);
 	make_img(b, p, &img_add);
 	mlx_put_image_to_window(p->mlx, p->win, img, 500, 0);
 	mlx_destroy_image(p->mlx, img);

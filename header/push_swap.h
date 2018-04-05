@@ -105,5 +105,6 @@ int		key_funct(int keycode, void *param);
 int		one_step(void *param);
 void	option_g(t_list **a, t_list **b, t_param *p);
 void	not_option_g(t_list **a, t_list **b, t_param *p);
+float	calc_median_b(t_list *lst);
 
 #endif

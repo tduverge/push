@@ -96,11 +96,14 @@ void			quick_a(t_list **a, t_list **b, int *step, int test)
 		return (change_step(a, b, step, treat));
 	j = 0;
 	k = 0;
-	while (treat-- && k <= 2 * step[i] / 3)
+	while (treat-- && k < (2 * step[i] + 1) / 3)
 		((float)content(*a)) > median ? rotate_or_push_a(a, b, 0, &j) :
 			rotate_or_push_a(a, b, 1, &k);
 	step[i] -= k;
 	while (j-- && test)
-		apply_actions_pshswp(a, b, RRA, "rra\n");
+		if ((float)content(*b) <= calc_median_b(*b))
+			apply_actions_pshswp(a, b, RRR, "rrr\n");
+		else
+			apply_actions_pshswp(a, b, RRA, "rra\n");
 	step[0] ? quick_b(a, b, step) : 0;
 }

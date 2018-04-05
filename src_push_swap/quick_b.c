@@ -13,7 +13,7 @@
 
 #include "../header/push_swap.h"
 
-static float	calc_median_b(t_list *lst)
+float		calc_median_b(t_list *lst)
 {
 	int		min;
 	int		max;
@@ -34,50 +34,104 @@ static float	calc_median_b(t_list *lst)
 static void		empty_b(t_list **a, t_list **b, int *step, int j)
 {
 	int		len;
+	int		max;
 
 	len = ft_lstlen(*b);
-	simple_sort_b(a, b, len);
-	step[j] = len;
-	step[j + 1] = 0;
-	while (len--)
-		apply_actions_pshswp(a, b, PA, "pa\n");
-	quick_a(a, b, step, 1);
-	return ;
-}
-
-static int		select_sort_sens(t_list **b)
-{
-	t_list		*tmp;
-	int			max;
-	int			pos[2];
-	int			i;
-	int			len;
-
-	tmp = *b;
-	max = get_elem_max(*b);
-	pos[0] = -1;
-	i = 0;
-	len = ft_lstlen(*b);
-	while (tmp)
+	if (len == 1)
 	{
-		if (content(tmp) >= max - 3 && pos[0] == -1)
-			pos[0] = i;
-		if (content(tmp) >= max - 3)
-			pos[1] = i;
-		tmp = tmp->next;
-		i++;
+		apply_actions_pshswp(a, b, PA, "pa\n");
+		apply_actions_pshswp(a, b, RA, "ra\n");
 	}
-	return (pos[0] > len - pos[1] ? 1 : 0);
+	else if (len == 2)
+	{
+		if (content(*b) > content((*b)->next))
+		{
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			apply_actions_pshswp(a, b, RA, "ra\n");
+			apply_actions_pshswp(a, b, RA, "ra\n");
+		}
+		else
+		{
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			apply_actions_pshswp(a, b, RA, "ra\n");
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			apply_actions_pshswp(a, b, RA, "ra\n");
+		}
+	}
+	else if (len == 3)
+	{
+		max = get_elem_max(*b);
+		if (content(*b) == max)
+		{
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			if (content(*b) > content((*b)->next))
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+			else
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+			apply_actions_pshswp(a, b, RA, "ra\n");
+		}
+		else if (content(*b) == max - 1)
+		{
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			if (content(*b) == max)
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, SA, "sa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+			else
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+		}
+		else
+		{
+			apply_actions_pshswp(a, b, PA, "pa\n");
+			apply_actions_pshswp(a, b, RA, "ra\n");
+			if (content(*b) > content((*b)->next))
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+			else
+			{
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+				apply_actions_pshswp(a, b, PA, "pa\n");
+				apply_actions_pshswp(a, b, RA, "ra\n");
+			}
+		}
+	}
+	step[j] = 0;
+	quick_a(a, b, step, 1);
 }
 
 static void		select_sort(t_list **a, t_list **b, int *step, int j)
 {
 	int		max;
-	int		sens;
 	int		i;
 
 	max = get_elem_max(*b);
-	sens = select_sort_sens(b);
 	i = 0;
 	while (i != 4)
 	{
@@ -86,10 +140,8 @@ static void		select_sort(t_list **a, t_list **b, int *step, int j)
 			apply_actions_pshswp(a, b, PA, "pa\n");
 			i += 1;
 		}
-		else if (sens == 0)
-			apply_actions_pshswp(a, b, RB, "rb\n");
 		else
-			apply_actions_pshswp(a, b, RRB, "rrb\n");
+			apply_actions_pshswp(a, b, RB, "rrb\n");
 	}
 	step[j] = i;
 	step[j + 1] = 0;
@@ -112,7 +164,7 @@ void			quick_b(t_list **a, t_list **b, int *step)
 		j++;
 	if (len <= 3)
 		return (empty_b(a, b, step, j));
-	else if (len <= 23)
+	else if (len <= 2)
 		return (select_sort(a, b, step, j));
 	i = 0;
 	while (i < len / 2)
