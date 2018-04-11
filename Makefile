@@ -6,7 +6,7 @@
 #    By: kbedene <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/27 09:15:15 by kbedene      #+#   ##    ##    #+#        #
-#    Updated: 2018/04/10 16:43:46 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/10 17:16:04 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -63,7 +63,7 @@ LIBFT = ./libft/libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Werror -Wextra -ggdb
+FLAGS = -Wall -Werror -Wextra
 
 MINILIBX= minilibx_macos/libmlx.a
 

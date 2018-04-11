@@ -6,7 +6,7 @@
 /*   By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/17 18:21:05 by tduverge     #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/10 13:36:42 by tduverge    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/10 18:06:39 by tduverge    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,7 +61,7 @@ int				main(int ac, char **av)
 		if (not_format(&a, av[i--]))
 			return (ex_prg(1, &a, &b));
 	if (ft_lstis_sorted(a))
-		return (0);
+		return (ex_prg(0, &a, &b));
 	len = ft_lstlen(a);
 	change_to_index(a);
 	choose_sort(&a, &b, len);
