@@ -6,7 +6,7 @@
 #    By: tduverge <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/04/11 12:23:48 by tduverge     #+#   ##    ##    #+#        #
-#    Updated: 2018/04/11 12:25:30 by tduverge    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/11 12:40:30 by tduverge    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -59,6 +59,8 @@ else
 			if [ $sum_ko -eq 0 ]
 			then
 				echo "              \033[42m\033[30mCONGRATULATION !!!\033[0m"
+			else
+				echo "                     \033[41m\033[30mFAIL\033[0m"
 			fi
 			echo "\033[1;34mYou have \033[32m$sum_ok\033[34m success for \033[36m$2\033[34m test(s) and \033[31m$sum_ko\033[34m fail(s)"
 			echo "Your maximum is \033[31m$max\033[34m"
